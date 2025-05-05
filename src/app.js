@@ -142,9 +142,9 @@ router.post(
     const page = await browser.newPage();
 
     if (body.url) {
-      await page.goto(body.url, { waitUntil: "load" });
+      await page.goto(body.url, { waitUntil: "networkidle0" });
     } else {
-      await page.setContent(body.html, { waitUntil: "load" });
+      await page.setContent(body.html, { waitUntil: "networkidle0" });
     }
     ctx.body = await page.pdf(body.export).finally(() => page.close());
   }
